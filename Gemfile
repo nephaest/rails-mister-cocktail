@@ -50,3 +50,6 @@ gem 'rspec-rails', group: [ :test ]
 gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'font-awesome-rails'
+
+gem 'rails_12factor', group: :production
+gem 'puma',           group: :production
