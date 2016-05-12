@@ -3,11 +3,14 @@
 <h2><%= @cocktail.name %></h2>
 
 <h3>Ingredients <%= fa_icon 'plus', id: 'add-dose' %></h3>
-<%= simple_form_for [@cocktail, @dose] do |f| %>
-  <%= f.input :description %>
-  <%= f.input :ingredient_id, collection: @ingredients %>
-  <%= f.submit %>
-<% end %>
+
+<div id="new-dose-form" style="display: none">
+  <%= simple_form_for [@cocktail, @dose] do |f| %>
+    <%= f.input :description %>
+    <%= f.input :ingredient_id, collection: @ingredients %>
+    <%= f.submit 'Add' %>
+  <% end %>
+</div>
 
 <ul>
   <% @cocktail.doses.each do |dose| %>
