@@ -49,3 +49,4 @@ gem 'rspec-rails', group: [ :test ]
 
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem 'font-awesome-rails'
