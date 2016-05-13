@@ -1,23 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @cocktail.name %></h2>
+<div class="wrapper">
+  <h2 class="text-center"><%= @cocktail.name %></h2>
 
-<h3>Ingredients <%= fa_icon 'plus', id: 'add-dose' %></h3>
+  <!-- display & upload a photo -->
 
-<div id="new-dose-form" style="display: none">
-  <%= simple_form_for [@cocktail, @dose] do |f| %>
-    <%= f.input :description %>
-    <%= f.input :ingredient_id, collection: @ingredients %>
-    <%= f.submit 'Add' %>
-  <% end %>
+  <h3>Ingredients <%= fa_icon 'plus', id: 'add-dose' %></h3>
+
+  <div class="">
+    <div id="new-dose-form" style="display: none">
+      <%= simple_form_for [@cocktail, @dose] do |f| %>
+        <%= f.input :description %>
+        <%= f.input :ingredient_id, collection: @ingredients %>
+        <%= f.submit 'Add' %>
+      <% end %>
+    </div>
+  </div>
+  <ul class="list-unstyled">
+    <% @cocktail.doses.each do |dose| %>
+      <li>
+        <%= link_to fa_icon('trash-o'), dose_path(dose), method: :delete, data: { confirm: 'Are you sure?' } %> <%= dose.ingredient.name %> (<%= dose.description %>)
+      </li>
+    <% end %>
+  </ul>
 </div>
-
-<ul>
-  <% @cocktail.doses.each do |dose| %>
-    <li>
-      <%= link_to fa_icon('trash-o'), cocktail_dose_path(@cocktail, dose), method: :delete %> <%= dose.ingredient.name %> (<%= dose.description %>)
-    </li>
-  <% end %>
-</ul>
 
 <%= link_to 'back to cocktails', cocktails_path %>

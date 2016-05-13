@@ -53,3 +53,4 @@ gem 'font-awesome-rails'
 
 gem 'rails_12factor', group: :production
 gem 'puma',           group: :production
+gem 'figaro'

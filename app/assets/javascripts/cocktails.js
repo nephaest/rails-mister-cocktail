@@ -1,6 +1,5 @@
 $(document).ready(function() {
-  $('#add-dose').on('click', function() {
-    console.log('gbhrebghjwb gk');
+  $('#add-dose').on('click', function(ev) {
     $('#new-dose-form').toggle();
   });
 });
