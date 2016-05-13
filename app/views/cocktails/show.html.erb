@@ -2,12 +2,13 @@
 
 <div class="container">
   <h2 class="text-center"><%= @cocktail.name %></h2>
+  <br>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="col-xs-12 col-sm-6">
       <!-- display & upload a photo -->
       <% if @cocktail.photo? %>
-        <%= cl_image_tag @cocktail.photo.path, width: 600, height: 450, crop: :fill %>
+        <%= cl_image_tag @cocktail.photo.path, crop: :fill, class: 'img-responsive' %>
       <% end %>
 
       <h3>Ingredients <%= icon 'plus', id: 'add-dose' %></h3>
@@ -25,6 +26,35 @@
         <% @cocktail.doses.each do |dose| %>
           <li>
             <%= link_to icon('trash-o'), dose_path(dose), method: :delete, data: { confirm: 'Are you sure?' } %> <%= dose.ingredient.name %> (<%= dose.description %>)
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h3>Reviews</h3>
+      <div class="row">
+        <div id="new-review-form">
+          <%= simple_form_for [@cocktail, @review] do |f| %>
+            <div class="col-xs-12 col-md-6">
+              <%= f.input :rating, collection: (0..5).to_a %>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <%= f.input :comment %>
+            </div>
+            <div class="col-xs-12">
+              <%= f.submit 'Add' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <br>
+      <ul class="list-unstyled">
+        <% @cocktail.reviews.each do |review| %>
+          <li>
+            <% (1..5).each do |glass| %>
+              <%= icon 'glass', class: glass <= review.rating ? 'glass-enabled' : 'glass-disabled' %>
+            <% end %>
+            <p><%= review.comment %></p>
           </li>
         <% end %>
       </ul>
