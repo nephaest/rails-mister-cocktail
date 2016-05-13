@@ -1,20 +1,16 @@
-<h2>Cocktails</h2>
+<h2 class='text-center'>Cocktails</h2>
 
 <div class="container">
   <div class="row">
     <% @cocktails.each do |cocktail| %>
       <div class="col-xs-12 col-sm-4">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
-          <!-- <div class="card-category">Popular</div> -->
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cocktail.photo? ? '''http://res.cloudinary.com/nephaest/image/upload/' + cocktail.photo.path : 'http://placehold.it/400x250' %>);">
           <div class="card-description">
-            <h3><%= link_to cocktail.name, cocktail_path(cocktail) %></h3>
+            <h3><%= cocktail.name %></h3>
           </div>
-          <!-- <img class="card-user avatar" src="user.jpg"> -->
-          <a class="card-link" href="#" ></a>
+          <%= link_to '', cocktail, class: 'card-link' %>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-
-<%= link_to 'Create your cocktail', new_cocktail_path %>

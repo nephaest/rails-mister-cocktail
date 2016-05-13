@@ -49,8 +49,11 @@ gem 'rspec-rails', group: [ :test ]
 
 gem 'bootstrap-sass'
 gem 'simple_form'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 
 gem 'rails_12factor', group: :production
 gem 'puma',           group: :production
 gem 'figaro'
+gem 'cloudinary'
+gem 'attachinary'
+gem 'jquery-fileupload-rails'

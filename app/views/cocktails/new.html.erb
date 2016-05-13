@@ -1,4 +1,21 @@
-<%= simple_form_for @cocktail do |f| %>
-  <%= f.input :name %>
-  <%= f.submit %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <col-xs-12 class="col-sm-6 col-sm-offset-3 padded">
+      <%= simple_form_for @cocktail do |f| %>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :name %>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :photo, as: :attachinary %>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+            <div class="text-center">
+              <%= f.submit %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </col-xs-12>
+  </div>
+</div>

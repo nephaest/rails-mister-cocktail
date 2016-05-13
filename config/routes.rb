@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :doses, only: [:create]
   end
   resources :doses, only: [:destroy]
+
+  mount Attachinary::Engine => "/attachinary"
   root 'cocktails#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

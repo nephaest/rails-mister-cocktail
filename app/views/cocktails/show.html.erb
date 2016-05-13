@@ -1,28 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<div class="wrapper">
+<div class="container">
   <h2 class="text-center"><%= @cocktail.name %></h2>
 
-  <!-- display & upload a photo -->
-
-  <h3>Ingredients <%= fa_icon 'plus', id: 'add-dose' %></h3>
-
-  <div class="">
-    <div id="new-dose-form" style="display: none">
-      <%= simple_form_for [@cocktail, @dose] do |f| %>
-        <%= f.input :description %>
-        <%= f.input :ingredient_id, collection: @ingredients %>
-        <%= f.submit 'Add' %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <!-- display & upload a photo -->
+      <% if @cocktail.photo? %>
+        <%= cl_image_tag @cocktail.photo.path, width: 600, height: 450, crop: :fill %>
       <% end %>
+
+      <h3>Ingredients <%= icon 'plus', id: 'add-dose' %></h3>
+
+      <div class="">
+        <div id="new-dose-form" style="display: none">
+          <%= simple_form_for [@cocktail, @dose] do |f| %>
+            <%= f.input :description %>
+            <%= f.input :ingredient_id, collection: @ingredients %>
+            <%= f.submit 'Add' %>
+          <% end %>
+        </div>
+      </div>
+      <ul class="list-unstyled">
+        <% @cocktail.doses.each do |dose| %>
+          <li>
+            <%= link_to icon('trash-o'), dose_path(dose), method: :delete, data: { confirm: 'Are you sure?' } %> <%= dose.ingredient.name %> (<%= dose.description %>)
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
-  <ul class="list-unstyled">
-    <% @cocktail.doses.each do |dose| %>
-      <li>
-        <%= link_to fa_icon('trash-o'), dose_path(dose), method: :delete, data: { confirm: 'Are you sure?' } %> <%= dose.ingredient.name %> (<%= dose.description %>)
-      </li>
-    <% end %>
-  </ul>
 </div>
-
-<%= link_to 'back to cocktails', cocktails_path %>
